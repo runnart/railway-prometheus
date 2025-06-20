@@ -18,7 +18,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
   
-  - job_name: 'instabot-staging'
+  - job_name: 'instabot'
     scrape_interval: 5s
     dns_sd_configs:
       - names:
