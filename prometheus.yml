@@ -4,13 +4,13 @@ global:
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-    monitor: 'railway-prom'
+    monitor: 'prometheus_a'
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'prometheus'
+  - job_name: 'self-metrics'
 
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
@@ -18,17 +18,10 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
   
-  - job_name: 'demo_application'
+  - job_name: 'instabot-staging'
     scrape_interval: 5s
-    static_configs:
-      - targets: ['demo.do.prometheus.io:9090']
-
-  # - job_name: 'postgres'
-  #   scrape_interval: 5s
-  #   static_configs:
-  #     - targets: ['localhost:9187']
-
-  # - job_name: 'mysql'
-  #   scrape_interval: 5s
-  #   static_configs:
-  #     - targets: ['localhost:9104']
+    dns_sd_configs:
+      - names:
+          - "instabot.railway.internal"
+        type: "AAAA"
+        port: 84
