@@ -17,14 +17,6 @@ scrape_configs:
 
     static_configs:
       - targets: ['localhost:9090']
-  
-  - job_name: 'instabot'
-    scrape_interval: 20s
-    dns_sd_configs:
-      - names:
-          - "instabot.railway.internal"
-        type: "AAAA"
-        port: 84
 
   - job_name: 'otel-collector'
     static_configs:
